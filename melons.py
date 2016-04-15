@@ -3,14 +3,14 @@
 class AbstractMelonOrder(object):
     """"""
 
-    def __init__(self, species, qty"):
+    def __init__(self, species, qty, order_type, tax):
         """Initialize melon order attributes"""
 
         self.species = species
         self.qty = qty
         self.shipped = False
-        self.order_type = None
-        self.tax = None
+        self.order_type = order_type  #not needed here even though they share commonality.
+        self.tax = tax         #values are different
 
     def get_total(self):
         """Calculate price."""
@@ -28,8 +28,13 @@ class AbstractMelonOrder(object):
 class DomesticMelonOrder(AbstractMelonOrder):
     """A domestic (in the US) melon order."""
 
-    order_type = "domestic"
-    tax = 0.08
+    # order_type = "domestic"
+    # tax = 0.08
+
+    def __init__(self, species, qty): #number of arguments we enter when the class is being instantiated
+        super(DomesticMelonOrder, self).__init__(species, qty, "domestic", 0.08) #These parameters need to match super class parameters)
+        # because they are the ones being passed into the AbstractMelonOrder(parent)
+    
 
 
 
