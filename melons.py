@@ -3,7 +3,7 @@
 class AbstractMelonOrder(object):
     """"""
 
-    def __init__(self, species, qty, order_type, tax):
+    def __init__(self, species, qty, order_type, tax, country_code):  #parameters
         """Initialize melon order attributes"""
 
         self.species = species
@@ -11,6 +11,7 @@ class AbstractMelonOrder(object):
         self.shipped = False
         self.order_type = order_type  #not needed here even though they share commonality.
         self.tax = tax         #values are different
+        self.country_code = country_code
 
     def get_total(self):
         """Calculate price."""
@@ -32,7 +33,7 @@ class DomesticMelonOrder(AbstractMelonOrder):
     # tax = 0.08
 
     def __init__(self, species, qty): #number of arguments we enter when the class is being instantiated
-        super(DomesticMelonOrder, self).__init__(species, qty, "domestic", 0.08) #These parameters need to match super class parameters)
+        super(DomesticMelonOrder, self).__init__(species, qty, "domestic", 0.08, "USA") #These parameters need to match super class parameters)
         # because they are the ones being passed into the AbstractMelonOrder(parent)
     
 
@@ -41,8 +42,13 @@ class DomesticMelonOrder(AbstractMelonOrder):
 class InternationalMelonOrder(AbstractMelonOrder):
     """An international (non-US) melon order."""
 
-    order_type = "international"
-    tax = 0.17
+    # order_type = "international"
+    # tax = 0.17
+
+    # creating an instance of InternationalMelonOrder Class
+    def __init__(self, species, qty, country_code): # When we instanciate InternationalMelonOrder these are the parameters we need provide arguments for.
+        super(InternationalMelonOrder, self).__init__(species, qty, "international", 0.17, country_code)  #arguments
+        # Because we are calling the parent class in this dunder init, the arguments neeed to match the parent class parameters.
 
     # need to add a dunder init like above or undo the dunder init above in order for the bottom to work. 
     # both ways work
