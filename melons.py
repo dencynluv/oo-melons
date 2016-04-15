@@ -44,6 +44,9 @@ class InternationalMelonOrder(AbstractMelonOrder):
     order_type = "international"
     tax = 0.17
 
+    # need to add a dunder init like above or undo the dunder init above in order for the bottom to work. 
+    # both ways work
+
     def get_country_code(self):
         """Return the country code."""
 
